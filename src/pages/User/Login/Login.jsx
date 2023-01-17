@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { InputText } from '../../../common/InputText/InputText';
@@ -8,7 +8,7 @@ import { Decoder } from '../../../services/utiles';
 
 //RDX imports......
 import { useSelector, useDispatch } from "react-redux";
-import { login } from '../userSlice';
+import { userData, login } from '../userSlice';
 
 import './Login.css';
 
@@ -16,6 +16,8 @@ export const Login = () => {
 
     //Instancia de métodos de Redux
     const dispatch = useDispatch();
+
+    const datosReduxUsuario = useSelector(userData);
 
     //Hooks
     const [credenciales, setCredenciales] = useState({
@@ -32,7 +34,7 @@ export const Login = () => {
         //Bindear (atar)
         setCredenciales((prevState)=>({...prevState, 
             [e.target.name] : e.target.value
-        
+            
         }));;
     }
 
@@ -58,8 +60,12 @@ export const Login = () => {
                     }
 
                     //Finalmente, guardo en RDX....
+
+                    //Guardo mediante la ACCIÓN login, los datos del token y del token decodificado (datos de usuario)
                     dispatch(login({userPass: userPass}));
 
+
+                    //Finalmente, navego y te llevo a home en casi un segundo de delay
                     setTimeout(()=>{
                         navigate("/")
                     },750);
@@ -67,6 +73,12 @@ export const Login = () => {
             )
             .catch(error => console.log(error));
     }
+
+    useEffect(()=>{
+        if(datosReduxUsuario.userPass.token !== ''){
+            navigate("/");
+        }
+    },[])
 
     return (
         <div className='loginDesign'>
