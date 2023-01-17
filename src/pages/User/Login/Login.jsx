@@ -1,13 +1,21 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useNavigate} from 'react-router-dom';
-import { InputText } from '../../common/InputText/InputText';
-import { postLogin } from '../../services/apiCalls';
+import { useNavigate } from 'react-router-dom';
+import { InputText } from '../../../common/InputText/InputText';
+import { postLogin } from '../../../services/apiCalls';
+import { Decoder } from '../../../services/utiles';
+
+//RDX imports......
+import { useSelector, useDispatch } from "react-redux";
+import { login } from '../userSlice';
 
 import './Login.css';
 
 export const Login = () => {
+
+    //Instancia de métodos de Redux
+    const dispatch = useDispatch();
 
     //Hooks
     const [credenciales, setCredenciales] = useState({
@@ -32,16 +40,25 @@ export const Login = () => {
     const Logeame = () => {
 
         //Desde aqui llamamos al servicio....
-        postLogin()
+        postLogin(credenciales)
             .then(
                 resultado => {
 
-                    //Ahora yo desencriptaría el token... 
+                    //Ahora yo decodificaría el token... 
 
-                    //Una vez desencriptado, guardaría los datos de usuario desencriptados
-                    //y el token encriptado también, ambas cosas en REDUX, para usarlas cuando yo quiera
+                    //Una vez decodificado, guardaría los datos de usuario y el token,
+                    //ambas cosas en REDUX, para usarlas cuando yo quiera
 
-                    console.log(resultado);
+                    let decodificado = Decoder(resultado);
+
+                    let userPass = {
+                        token : resultado,
+                        user: decodificado.usuario[0]
+
+                    }
+
+                    //Finalmente, guardo en RDX....
+                    dispatch(login({userPass: userPass}));
 
                     setTimeout(()=>{
                         navigate("/")

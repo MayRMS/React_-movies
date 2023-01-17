@@ -4,12 +4,18 @@ import App from './App'
 import './index.css'
 
 //Importo BrowserRouter para envolver toda la aplicacion desde main.jsx 
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+//RDX
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+         <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
 )
