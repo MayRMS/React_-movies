@@ -10,3 +10,15 @@
 
     background-color: lightcyan;
 }
+
+.rosterDesign {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingGif {
+    height: 15em;
+}

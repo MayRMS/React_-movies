@@ -1,7 +1,9 @@
 
 import axios from 'axios';
 
-const root = 'http://localhost:3000/'
+const root = 'http://localhost:3000/';
+const root2 = 'https://api.themoviedb.org/3';
+const api_key = '210d6a5dd3f16419ce349c9f1b200d6d';
 
 export const postLogin = async (credenciales) => {
 
@@ -14,4 +16,10 @@ export const postLogin = async (credenciales) => {
 export const postRegister = async (userData) => {
 
     
+}
+
+export const getSeries = async () => {
+
+    return await axios.get(`${root2}/tv/popular?api_key=${api_key}&language=en-US&page=1`);
+
 }

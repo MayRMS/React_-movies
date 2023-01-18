@@ -8,3 +8,5 @@ export const Decoder = (token) => {
     return decodedToken;
     
 }
+
+export const poster_default = 'https://image.tmdb.org/t/p/original/';
