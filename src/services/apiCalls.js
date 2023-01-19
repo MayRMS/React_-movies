@@ -23,3 +23,9 @@ export const getSeries = async () => {
     return await axios.get(`${root2}/tv/popular?api_key=${api_key}&language=en-US&page=1`);
 
 }
+
+export const getSearch = async (criteria) => {
+
+    return await axios.get(`${root2}/search/tv?api_key=${api_key}&language=en-US&page=1&query=${criteria}&include_adult=false`);
+
+}
