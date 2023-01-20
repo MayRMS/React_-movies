@@ -72,6 +72,7 @@ export const Header = () => {
 
     const handleSearch = (e) => {
 
+        //Esta funcionalidad setSearch de tipo setter lo que hace es cambiar el valor del hook search
         setSearch(e.target.value);
         
     }
