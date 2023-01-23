@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputText } from '../../../common/InputText/InputText';
 import { postLogin } from '../../../services/apiCalls';
-import { Decoder } from '../../../services/utiles';
+import { Decoder, errorCheck } from '../../../services/utiles';
 
 //RDX imports......
 import { useSelector, useDispatch } from "react-redux";
@@ -25,6 +25,11 @@ export const Login = () => {
         password: ''
     })
 
+    const [credencialesError, setErrorCredenciales] = useState({
+        emailError: '',
+        passwordError: ''
+    })
+
     //Variables y constantes
     const navigate = useNavigate();
 
@@ -40,6 +45,17 @@ export const Login = () => {
 
     //Funciones
     const Logeame = () => {
+
+        //Check para saber si tenemos un error.......
+
+        //Este for in va a recorrer el objeto de js en busqueda de que una sola de sus propiedades
+        //tenga un valor distinto de comillas vacias, es decir, haya un error presente
+        for (const property in credencialesError) {
+           if(credencialesError[property] !== ''){
+                return;
+           }
+        }
+          
 
         //Desde aqui llamamos al servicio....
         postLogin(credenciales)
@@ -80,21 +96,41 @@ export const Login = () => {
         }
     },[])
 
+    const loginErrorHandler = (e) => {
+        
+        let error = '';
+
+        error = errorCheck(e.target.name, e.target.value);
+
+
+        setErrorCredenciales((prevState)=>({...prevState, 
+            [e.target.name + 'Error'] : error
+        }));
+    }
+
+
     return (
         <div className='loginDesign'>
             {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
             <InputText 
                 type={"email"} 
-                name={"email"} 
+                name={"email"}
+                className={credencialesError.emailError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
                 placeholder={"Escribe tu email"} 
                 functionHandler={InputHandler}
+                errorHandler={loginErrorHandler}
             />
+            <div className='errorText'>{credencialesError.emailError}</div>
+
             <InputText 
                 type={"password"} 
-                name={"password"} 
+                name={"password"}
+                className={credencialesError.passwordError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
                 placeholder={"Escribe tu contraseña"} 
                 functionHandler={InputHandler}
+                errorHandler={loginErrorHandler}
             />
+            <div className='errorText'>{credencialesError.passwordError}</div>
 
             <div className='loginButtonDesign' onClick={()=>Logeame()}>LOGIN</div>
         </div>

@@ -93,6 +93,11 @@ export const Header = () => {
 
     }
 
+    const searchErrorHandler = (e) => {
+
+        console.log("comprobamos mañana la búsqueda");
+    }
+
 
     //Ejecuto el condicional if, para.....
     //Primero, en caso de que el token contenga algo que no sean comillas vacias, mostrar la opcion de logout y el nombre de usuario
@@ -102,7 +107,14 @@ export const Header = () => {
             <div onClick={()=>ResetHome()} className='logoDesignHeader'><img className='cameraAvatar' src={Logo} alt="Camara"/></div>
             <div className='searchDesign'>
 
-                <InputText type={"text"} name={"search"} placeholder={"nada"} functionHandler={handleSearch} />
+                <InputText 
+                    type={"text"} 
+                    name={"search"} 
+                    className={'inputDesign'} 
+                    placeholder={"nada"} 
+                    functionHandler={handleSearch} 
+                    errorHandler={searchErrorHandler}
+                />
             </div>
 
             <div className='headerLinksDesign'>
