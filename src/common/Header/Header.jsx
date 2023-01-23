@@ -12,7 +12,7 @@ import Logo from './camera.png';
 import { useSelector, useDispatch } from "react-redux";
 //a continuación, importo los datos del estado de la slice de user (userData) y la ACCION logout
 import { userData, logout } from "../../pages/User/userSlice";
-import { serieData, find } from '../../pages/serieSlice';
+import { serieData, find, clear } from '../../pages/serieSlice';
 import { InputText } from '../InputText/InputText';
 import { getSearch } from '../../services/apiCalls';
 
@@ -32,7 +32,7 @@ export const Header = () => {
 
     //Guardo en la constante datosReduxUsuario, los datos que me traigo del state de redux (userData)
     const datosReduxUsuario = useSelector(userData);
-
+    const datosReduxSeries = useSelector(serieData)
     // useEffect(() => {
     //     //Este useEffect lo hago para saber que contiene Redux la slice de user realmente....
     //     console.log(datosReduxUsuario);
@@ -55,8 +55,14 @@ export const Header = () => {
                 )
                 .catch(error=> console.log(error));
 
-        }
+        //La condición de este else if nos indica que sólo entrará si la búsqueda está vacia y en redux no hay resultados
+        //de búsquedas anteriores, eso nos OBLIGA a interpretar que antes se escribió algo para volver a dejarlo en las
+        //comillas vacias.
+        } else if(search === "" && datosReduxSeries.series.length > 0) {
 
+            //Si borramos lo que había escrito o no nay nada, limpiamos las series de REDUX
+            dispatch(clear({choosen : {}, series: []}));
+        } 
 
     },[search])
 
@@ -77,13 +83,23 @@ export const Header = () => {
         
     }
 
+    const ResetHome = () => {
+
+        //primero limpiamos búsquedas posibles de Redux
+        dispatch(clear({choosen : {}, series: []}));
+
+        //redirigimos a Home
+        navigate("/")
+
+    }
+
 
     //Ejecuto el condicional if, para.....
     //Primero, en caso de que el token contenga algo que no sean comillas vacias, mostrar la opcion de logout y el nombre de usuario
 
     return (
         <div className='headerDesign'>
-            <div onClick={()=>navigate("/")} className='logoDesignHeader'><img className='cameraAvatar' src={Logo} alt="Camara"/></div>
+            <div onClick={()=>ResetHome()} className='logoDesignHeader'><img className='cameraAvatar' src={Logo} alt="Camara"/></div>
             <div className='searchDesign'>
 
                 <InputText type={"text"} name={"search"} placeholder={"nada"} functionHandler={handleSearch} />
