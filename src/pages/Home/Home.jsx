@@ -57,9 +57,9 @@ export const Home = () => {
 
     }, [series]);
 
-    useEffect(() => {
-        console.log("eeeeooooooooo", datosReduxSeries);
-    })
+    // useEffect(() => {
+    //     console.log("eeeeooooooooo", datosReduxSeries);
+    // })
 
     const Choosen = (serie) => {
 

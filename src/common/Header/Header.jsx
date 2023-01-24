@@ -120,6 +120,15 @@ export const Header = () => {
             <div className='headerLinksDesign'>
                 {/* Introducimos el logo, independientemente de lo que nos vaya a sacar después */}
 
+                {/* Renderizado condicional por si el usuario es admin y hay que mostrar la sección de Admin */}
+
+                {datosReduxUsuario.userPass.user.rol === "admin" &&
+                
+                    <div onClick={()=>navigate("/admin")} className='linkDesign'>admin</div>
+                
+                }
+
+                {/* Renderizado condicional por si el usuario sí está logeado... */}
                 {datosReduxUsuario.userPass.token !== "" ?
 
                     (<>

@@ -10,7 +10,7 @@ export const postLogin = async (credenciales) => {
     // return await axios.post(`${root}/user/login`, credenciales);
 
     //Devuelvo un token hardcodeado
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2M2I5NWFiM2JkOWU2MDAxYjNmYzlkYmUiLCJuYW1lIjoiTWFyY29zIiwic3VybmFtZSI6IkzDs3BleiIsImRuaSI6IjIzMjc4NjU2TiIsImVtYWlsIjoibWFyY29zbUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRTUnZTYWxRVXBmR3hMT2dhVnNZVlcud095cmk0YkZTZDJRcUVaTzFWN0w0T200cjBjSDcyMiIsInBob25lIjo2OTY3NzY0MjEsIm5hdGlvbmFsaXR5IjoiRXNwYcOxYSIsIl9fdiI6MH1dLCJpYXQiOjE2NzM4NTk1MjgsImV4cCI6MTY3Mzk0NTkyOH0.dTAu9QE_93WMHoRukxUWFo2gwJbCBQb4EjUAqImYtPI';
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2M2I5NzI5NWJkOWU2MDAxYjNmYzlkZTYiLCJuYW1lIjoiRnJhbmNpc2NvIiwic3VybmFtZSI6IkNhcnJpb24iLCJkbmkiOiI2NzY2NzM1NUIiLCJlbWFpbCI6ImZyYW5jaXNjb2NAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkVGZ5SjFJZDJFT2VRZGRtUnk1cWFoT3pxOGxVRXYxM2FPa3ZCTjcwMmhENUgwWG9ucW1lNjYiLCJwaG9uZSI6NjU2NTMzMzMzLCJuYXRpb25hbGl0eSI6IkVzcGHDsWEiLCJfX3YiOjAsInJvbCI6ImFkbWluIn1dLCJpYXQiOjE2NzQ1NTI0MTEsImV4cCI6MTY3NDYzODgxMX0.DqNzqIz2NwuRakHScEzfSQrJT_WEpYhE71Eg0OrqoWo';
 };
 
 export const postRegister = async (body) => {
@@ -35,16 +35,52 @@ export const getSearch = async (criterioBusqueda) => {
 export const postRent = async (body, token) => {
 
 
-    let config = {
-        method: 'post', //aqui especifico el protocolo http
-        url : `${root}/oders/neworder`, //este sería mi endpoint del backend
-        body, //el body que contiene los datos
-        headers: { 
-            'Authorization': 'Bearer ' + token
-          }
-    }
+    //Esta sería la forma en la que conectaríamos con la API para realizar el pedido
 
-    return await axios.post(config);
+    // let config = {
+    //     method: 'post', //aqui especifico el protocolo http
+    //     url : `${root}/oders/neworder`, //este sería mi endpoint del backend
+    //     body, //el body que contiene los datos
+    //     headers: { 
+    //         'Authorization': 'Bearer ' + token
+    //       }
+    // }
+
+    // return await axios.post(config);
+
+
+    //Las dos líneas que hay a continuación hacen referencia a poder hacer el pedido en este caso ya que no dispongo de una API
+    const resultado = {data: 'El pedido se ha realizado correctamente'}
+    return resultado;
+    
+}
+
+
+//Endpoints para Admin
+
+export const allUsersAdmin = async (token) => {
+
+    //Esta sería la forma en la que conectaríamos con la API para traernos todos los users en modo admin
+
+    // let config = {
+    //     method: 'post', //aqui especifico el protocolo http
+    //     url : `${root}/admin/allUsers`, //este sería mi endpoint del backend de admin que trae todos los users
+    //     body, //el body que contiene los datos
+    //     headers: { 
+    //         'Authorization': 'Bearer ' + token
+    //       }
+    // }
+
+    // return await axios.post(config);
+
+    const resultado = [
+        {id: 3,name: 'Pepito', surname: 'Garcia', age: 28 },
+        {id: 2,name: 'Pepita', surname: 'Perez', age: 23},
+        {id: 1,name: 'Manolito', surname: 'Sanchez', age: 18},
+        {id: 56,name: 'Manolita', surname: 'Rodriguez', age: 50}
+    ];
+
+    return resultado;
 }
 
 
