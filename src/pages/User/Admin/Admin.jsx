@@ -4,57 +4,35 @@ import './Admin.css';
 
 import {useNavigate} from 'react-router-dom';
 
-//Imports RDX
 import { useSelector } from "react-redux";
 import { userData } from '../userSlice';
-import { allUsersAdmin } from '../../../services/apiCalls';
+import { allUsersRents } from '../../../services/apiCalls';
+import { CardUsersRents } from '../../../common/CardUsersRentals/CardUsersRentals';
 
 export const Admin = () => {
-
-    //Instancio useNavigate
     const navigate = useNavigate();
-
-    //Instancio RDX
     const userRDX = useSelector(userData);
-
-    const [allUsers, setAllUsers] = useState([]);
-
+    const [allRentals, setAllRentals] = useState([]);
     useEffect(()=>{
-        //Me conecto a redux para ver las credenciales de usuario y comprobar que su rol es admin...
-        if(userRDX.userPass.user.rol !== 'admin'){
+        if(!userRDX.userPass.user.admin){
             navigate("/");
         }
-
     },[])
 
+    
     useEffect(()=>{
-
-        if(allUsers.length === 0){
-
-            allUsersAdmin()
-                .then(resultado => {
-
-                    //seteo el hook de los usuarios...
-                    setAllUsers(resultado);
-                })
-                .catch(error => console.log(error));
-        };
-
-    },[allUsers]);
+        if(!allRentals?.length) allUsersRents(userRDX.userPass.token).then(e => setAllRentals(e.allRents));
+    },[allRentals]);
 
     return (
-        <div className='adminDesign'>
-            {allUsers.length > 0 &&
-            
-                allUsers.map(
-                    user => {
-                        return (
-                            <div key={user.id}>{user.name} {user.surname}</div>
-                        )
-                    }
-                )
-            }
 
+        <div className='adminDesign'>
+            {allRentals?.length > 0 && allRentals.map((rent, i) => (<CardUsersRents key= {i}rent={rent}/>))}
+       
         </div>
-    )
+
+
+
+    
+    )  
 };

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { InputText } from '../../../common/InputText/InputText';
 import { errorCheck } from '../../../services/utiles';
 import './Register.css';
+import { newUser } from '../../../services/apiCalls'
 
 export const Register = () => {
 
@@ -10,7 +11,7 @@ export const Register = () => {
         name: '',
         password: '',
         email: '',
-        phone: '',
+        age: '',
         country: ''
     })
 
@@ -18,16 +19,17 @@ export const Register = () => {
         nameError: '',
         passwordError: '',
         emailError: '',
-        phoneError: '',
+        ageError: '',
         countryError: ''
     })
 
+    const register = async () => {
+        const newRegister = await newUser(usuario)
+        return newRegister
+    }
+
     const registerInputHandler = (e) => {
 
-        //Manejo la entrada de datos en los input y voy actualizando el hook usuario a medida
-        //que los datos se van introduciendo
-
-        //Bindear (atar)
         setUsuario((prevState)=>({...prevState, 
             [e.target.name] : e.target.value
             
@@ -54,7 +56,7 @@ export const Register = () => {
             <InputText 
                 type={'text'} 
                 name={'name'} 
-                className={usuarioError.nameError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
+                className={usuarioError.nameError === '' ? 'registerInput' : 'registerInput inputDesignError'} 
                 placeholder={'nombre'} functionHandler={registerInputHandler} 
                 errorHandler={registerErrorHandler}
             />
@@ -62,7 +64,7 @@ export const Register = () => {
             <InputText 
                 type={'password'} 
                 name={'password'} 
-                className={usuarioError.passwordError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
+                className={usuarioError.passwordError === '' ? 'registerInput' : 'registerInput inputDesignError'} 
                 placeholder={'pass'} 
                 functionHandler={registerInputHandler} 
                 errorHandler={registerErrorHandler}
@@ -70,9 +72,9 @@ export const Register = () => {
             <div className='errorText'>{usuarioError.passwordError}</div>
             <InputText 
                 type={'text'} 
-                name={'phone'} 
-                className={usuarioError.phoneError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
-                placeholder={'telf'} 
+                name={'age'} 
+                className={usuarioError.ageError === '' ? 'registerInput' : 'registerInput inputDesignError'} 
+                placeholder={'age'} 
                 functionHandler={registerInputHandler} 
                 errorHandler={registerErrorHandler}
             />
@@ -80,7 +82,7 @@ export const Register = () => {
             <InputText 
                 type={'text'} 
                 name={'country'} 
-                className={usuarioError.countryError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
+                className={usuarioError.countryError === '' ? 'registerInput' : 'registerInput inputDesignError'} 
                 placeholder={'pais'} 
                 functionHandler={registerInputHandler} 
                 errorHandler={registerErrorHandler}
@@ -89,12 +91,19 @@ export const Register = () => {
             <InputText 
                 type={'email'} 
                 name={'email'} 
-                className={usuarioError.emailError === '' ? 'inputDesign' : 'inputDesign inputDesignError'} 
+                className={usuarioError.emailError === '' ? 'registerInput' : 'registerInput inputDesignError'} 
                 placeholder={'correo'} 
                 functionHandler={registerInputHandler} 
                 errorHandler={registerErrorHandler}
             />
             <div className='errorText'>{usuarioError.emailError}</div>
+
+            <div className='registerButtonDesign' onClick={async ()=>{
+            
+                console.log(usuario);
+                await register(usuario)
+            }
+            }>Register</div>
         </div>
     );
 };

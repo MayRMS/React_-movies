@@ -1,13 +1,54 @@
 
 .profileDesign {
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    height: 85vh;
+    height: 90vh;
     width: 100vw;
 
-    background-color: lightcyan;
+    font-weight: bolder;
+    font-family: 'Martian Mono', monospace;
+    font-size:large;
+    background-image: url(src/pages/Home/abstract-style-glowing-background_52683-45136.jpeg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: rgb(78, 230, 241)
+}
+.yourRents{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    height: 20%;
+}
+.loadingGif {
+
+    border: 10px solid rgba(215, 12, 212, 0.466);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  
+}
+
+.rosterDesignProfile {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+    
+    font-family: 'Martian Mono', monospace;
+    font-size: smaller;
+    text-align: center;
+
 }

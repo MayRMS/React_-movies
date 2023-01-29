@@ -1,11 +1,13 @@
 
 .inputDesign {
 
-    width: 18em;
-    border-radius: 1em;
+    width: 30em;
+    height: 1.8em;
+    border-radius: 20em;
+    background-color: rgba(90, 240, 240, 0.178);
 
 }
 
 .inputDesignError {
-    border: 0.2em solid red;
+    border: 0.5em solid rgba(255, 0, 255, 0.483);
 }

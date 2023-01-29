@@ -5,21 +5,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    height: 12em;
-    width: 8em;
-
-    background-color: darkgrey;
-
+    height: 14em;
+    width: 10em;
     color: white;
-
     border-radius: 1em;
+    margin: 0.5em;
 
-    margin: 0.7em;
+    /*background-image: url(src/common/CardSerie/abstract-style-glowing-background_52683-45136.jpeg);*/
+    background-repeat: no-repeat;
+    background-size:cover;
+    transition: background-image .5s;
+    
+    
+}
+.cardSerieDesign:hover {
+    background-image:url(src/pages/Home/abstract-neon-lights-background_52683-45683.jpeg);
 }
 
-.posterDesign {
 
-    height: 7em;
-    width: 5em;
+.posterDesign {
+    
+    border-radius: 1em;
 }

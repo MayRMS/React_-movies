@@ -5,11 +5,75 @@
     justify-content: center;
     align-items: center;
 
-    height: 85vh;
+    height: 90vh;
     width: 100vw;
 
-    background-color: lightcyan;
+    font-weight: bold;
+    color:rgb(20, 255, 251);
+    font-size:3em;
+
+    font-family: 'Martian Mono', monospace;
+    text-align:center;
+    background-image: url(src/pages/Home/abstract-style-glowing-background_52683-45136.jpeg);
+    background-repeat: no-repeat;
+    background-size:cover;
 }
+
+.registerButtonDesign{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        height: 2.5em;
+        width: 8em;
+        margin-top: 3%;
+        border-radius: 1em;
+        cursor: pointer;
+    
+        transition: 0.2s;
+    
+        color: white;
+    
+        background-color: transparent;
+        font-weight: semibold;
+        color: rgb(41, 238, 241);
+        font-size: 1.7rem;
+        padding: 1rem 1.5rem; 
+        border: 2px solid #eee; 
+        border-radius: .5rem;
+        cursor: pointer;
+        transition: all 1s ease; 
+        box-shadow: .5em .5rem 1rem #ccc,
+            -.5em -.5rem 1rem #fff
+    }
+    
+    .registerButtonDesign:hover {
+        box-shadow: .5em .5rem 1rem #fff
+        , -.5em -.5rem 1rem #ccc
+    }
+    
+    .registerButtonDesign:active {
+        box-shadow: inset .2rem .2rem 1rem #fff
+          , inset -.2rem -.2rem 1rem #ccc
+      }
+
+
+.registerButtonDesign:hover {
+
+    transition: 0.3s;
+
+    background-color: rgba(255, 0, 238, 0.309);
+}
+
+.registerInput{
+    width: 60em;
+    height: 3em;
+    border-radius: 20em;
+    background-color: rgba(96, 255, 255, 0.619);
+    margin-top: 3%;
+
+}
+
 
 .errorText {
     color: red;

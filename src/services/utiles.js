@@ -34,21 +34,20 @@ export const errorCheck = (name, value) => {
                 return '';
             }
 
-        case 'phone':
+        case 'age':
 
-            if (! /(?=.*?[0-9])/.test(value) ) {
-                return "Teléfono incorrecto";
+            if (! /(?=.*?[0-2])/.test(value) ) {
+                return "Edad incorrecta";
             } else {
                 return "";
             }
 
         case 'password':
 
-            if (value.length < 8) {
+            if (value.length < 4) {
                 return "Write 8 characters at least"
             } else {
 
-                //Checking the password format....
 
                 if (! /[\d()+-]/g.test(value)) {
                     return "Password en formato inválido";
@@ -58,7 +57,7 @@ export const errorCheck = (name, value) => {
             }
 
         default:
-            console.log("what are you sending to me????");
+            console.log("Sorry but his is not the required info");
             break;
 
     }

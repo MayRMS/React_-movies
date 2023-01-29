@@ -1,0 +1,25 @@
+
+.cardUsersRentalsDesign {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 12em;
+    width: 55em;
+
+    background-color: rgb(7, 224, 221);
+
+    color: rgb(38, 16, 16);
+
+    border-radius: 1em;
+
+    margin: 0.7em;
+}
+
+.posterDesign {
+
+    height: 12em;
+    width: 8em;
+}

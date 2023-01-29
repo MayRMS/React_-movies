@@ -27,51 +27,15 @@ export const SerieDetail = () => {
     //Instancia navigate....
     const navigate = useNavigate();
 
-
-    //Hooks
     const [msg, setMsg] = useState('');
 
-    //Funciones....
-
-    const RentMe = () => {
-
-        //aquí llamaremos a la función que se comunica con la API
-        //que podemos encontrarla en services
-        //encargada de realizar el pedido....... le pasaremos detailRdx y detailUsr
-        //porque ahi tendremos la id de user y la id de la peli
-
-        //Vamos a recolectar los datos necesarios para hacer el alquiler y enviarlos al servicio
-
-        let body = {
-
-            //id de la serie...
-            idSerie : detailRdx.choosen.id,
-            idUser : detailUsr.userPass.user._id,
-            rentalDate : dayjs().format('DD/MM/YYYY'),
-            returnDate : dayjs().add(7, 'days').format('DD/MM/YYYY'),
-            price : 5
-        }
-
-        postRent(body, detailUsr.userPass.token)
-            .then(resultado => {
-                //Esto se ejecutará si el pedido se ha realizado correctamente
-                //mostrando el mensaje
-
-                setMsg(resultado.data)
-
-
-                //Después de haber realizado el pedido, llevamos al user a su perfil
-                setTimeout(()=>{
-
-                    navigate('/profile');
-                },1500);
-                
-            })
-            .catch(error => {
-
-                setMsg(error.message);
-            });
+    const rent = async()=>{
+        const rent = await postRent(detailUsr.userPass.user._id,detailRdx.choosen.id, detailUsr.userPass.token )
+        setTimeout(()=>{
+            navigate('/profile');
+        },500);
     }
+
 
     return(
         <div className='serieDesign'>
@@ -88,12 +52,9 @@ export const SerieDetail = () => {
                     <div>{detailRdx.choosen.first_air_date}</div>
                     <div>{detailRdx.choosen.overview !== '' ? detailRdx.choosen.overview : "No overview available"}</div>
 
-                    {/* En caso de que el usuario esté logeado, es decir, tenemos sus credenciales en REDUX, mostraremos
-                    un boton para poder alquilar la película */}
-
                     {detailUsr.userPass.token !== '' &&
                     
-                        <div onClick={()=>RentMe()} className='rentDesign'>ALQUILAME</div>
+                        <div onClick={()=>rent()} className='rentDesign'>RENT</div>
                     }
 
                     <div>{msg}</div>
